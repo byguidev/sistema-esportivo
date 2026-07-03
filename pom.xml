@@ -39,7 +39,7 @@
 
                 <configuration>
                     <mainClass>
-                        br.edu.ifba.saj.ads.poo.Main
+                        br.edu.ifba.saj.ads.poo.app.Main
                     </mainClass>
                 </configuration>
 
