@@ -1,4 +1,4 @@
-package br.edu.ifba.saj.ads.poo.presentation.controller;
+package br.edu.ifba.saj.ads.poo.controller;
 
 import br.edu.ifba.saj.ads.poo.business.ServicoAtividadesEsportivas;
 import br.edu.ifba.saj.ads.poo.model.Competicao;
@@ -35,11 +35,11 @@ public class CadastroCompeticaoController {
     public void onSubmit() {
         try {
             salvarCompeticao();
-            TelaInicialController.exibirAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Cadastro Realizado", "A competição foi salva com sucesso!");
+            MainController.exibirAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Cadastro Realizado", "A competição foi salva com sucesso!");
             nome.clear();
             data.setValue(null);
         } catch(Exception e) {
-            TelaInicialController.exibirAlerta(Alert.AlertType.INFORMATION, "Erro de validação", "Não foi possível salvar", e.getMessage());;
+            MainController.exibirAlerta(Alert.AlertType.INFORMATION, "Erro de validação", "Não foi possível salvar", e.getMessage());
         }
     }
 }
