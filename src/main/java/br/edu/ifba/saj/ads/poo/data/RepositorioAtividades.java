@@ -8,6 +8,7 @@ public class RepositorioAtividades {
     private List<Competicao> listaCompeticoes = new ArrayList<>();
     private List<Atleta> listaAtletas = new ArrayList<>();
     private List<Inscricao> listaInscricoes = new ArrayList<>();
+    private List<Resultado> listaResultados = new ArrayList<>();
 
     public void salvarCompeticao(Competicao c) {
         listaCompeticoes.add(c);
@@ -21,6 +22,10 @@ public class RepositorioAtividades {
         listaInscricoes.add(i);
     }
 
+    public void salvarResultado(Resultado r) {
+        listaResultados.add(r);
+    }
+
     public List<Competicao> listarCompeticoes() {
         return new ArrayList<>(listaCompeticoes);
     }
@@ -31,5 +36,9 @@ public class RepositorioAtividades {
 
     public List<Inscricao> listarInscricoes() {
         return new ArrayList<>(listaInscricoes);
+    }
+
+    public List<Resultado> listarResultados() {
+        return new ArrayList<>(listaResultados);
     }
 }

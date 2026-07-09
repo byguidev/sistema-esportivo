@@ -23,4 +23,9 @@ public class Inscricao {
     public Competicao getCompeticao() {
         return competicao;
     }
+
+    @Override
+    public String toString() {
+        return this.atleta.getNome();
+    }
 }

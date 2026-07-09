@@ -14,12 +14,12 @@
    <children>
       <HBox prefHeight="45.0" prefWidth="668.0">
          <children>
-            <Button fx:id="competicaoBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirCadastroCompeticao" prefHeight="25.0" prefWidth="101.0" text="Cadastrar Competição" HBox.hgrow="ALWAYS">
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirCadastroCompeticao" prefHeight="25.0" prefWidth="101.0" text="Cadastrar Competição" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="atletaBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirCadastroAtleta" text="Cadastrar Atleta" HBox.hgrow="ALWAYS">
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirCadastroAtleta" text="Cadastrar Atleta" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -28,7 +28,7 @@
       </HBox>
       <HBox prefHeight="45.0" prefWidth="708.0">
          <children>
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" text="Inscrever Atleta" HBox.hgrow="ALWAYS">
+            <Button fx:id="inscricaoBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirCadastroInscricao" prefHeight="25.0" prefWidth="101.0" text="Inscrever Atleta" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets top="7.0" />
                </HBox.margin>
@@ -43,14 +43,14 @@
          <children>
             <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="708.0" text="COMPETIÇÕES CADASTRADAS" VBox.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
             <TableView fx:id="tabelaCompeticao" maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="708.0" VBox.vgrow="ALWAYS">
               <columns>
                 <TableColumn fx:id="colCompeticaoNome" prefWidth="360.0" style="-fx-font-weight: normal;" text="NOME" />
-                  <TableColumn fx:id="colCompeticaoData" minWidth="0.0" prefWidth="121.0" style="-fx-font-weight: normal;" text="DATA" />
-                  <TableColumn fx:id="colCompeticaoLimite" maxWidth="1.7976931348623157E308" prefWidth="121.0" style="-fx-font-weight: normal;" text="LIMITE" />
+                  <TableColumn fx:id="colCompeticaoData" minWidth="0.0" prefWidth="120.0" style="-fx-font-weight: normal;" text="DATA" />
+                  <TableColumn fx:id="colCompeticaoLimite" prefWidth="120.0" style="-fx-font-weight: normal;" text="LIMITE" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -62,13 +62,13 @@
          <children>
             <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="708.0" text="ATLETAS CADASTRADOS" VBox.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
             <TableView fx:id="tabelaAtleta" maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="700.0" VBox.vgrow="ALWAYS">
                <columns>
                   <TableColumn fx:id="colAtletaNome" prefWidth="360.0" style="-fx-font-weight: normal;" text="NOME" />
-                  <TableColumn fx:id="colAtletaCategoria" minWidth="0.0" prefWidth="235.0" style="-fx-font-weight: normal;" text="CATEGORIA" />
+                  <TableColumn fx:id="colAtletaCategoria" minWidth="0.0" prefWidth="240.0" style="-fx-font-weight: normal;" text="CATEGORIA" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -80,13 +80,13 @@
          <children>
             <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="668.0" text="RESULTADOS" VBox.vgrow="ALWAYS">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
             <TableView maxHeight="1.7976931348623157E308" prefHeight="128.0" prefWidth="801.0" style="-fx-font-weight: normal;" VBox.vgrow="ALWAYS">
                <columns>
-                  <TableColumn prefWidth="318.0" style="-fx-font-weight: normal;" text="COMPETIÇÃO" />
-                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="480.0" style="-fx-font-weight: normal;" text="COLOCAÇÃO" />
+                  <TableColumn prefWidth="360.0" style="-fx-font-weight: normal;" text="COMPETIÇÃO" />
+                  <TableColumn minWidth="0.0" prefWidth="240.0" style="-fx-font-weight: normal;" text="COLOCAÇÃO" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -94,7 +94,7 @@
             </TableView>
             <HBox prefHeight="47.0" prefWidth="708.0">
                <children>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="4.0" prefWidth="801.0" text="Adicionar +" HBox.hgrow="ALWAYS" />
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirCadastroResultado" prefHeight="4.0" prefWidth="801.0" text="Adicionar +" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>

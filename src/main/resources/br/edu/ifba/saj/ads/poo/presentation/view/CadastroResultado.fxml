@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="355.0" prefWidth="310.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifba.saj.ads.poo.controller.CadastroResultadoController">
+   <children>
+      <Label text="Competição">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </Label>
+      <ComboBox fx:id="comboBoxCompeticao" prefHeight="25.0" prefWidth="285.0">
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
+      </ComboBox>
+      <Label text="1º Lugar" />
+      <ComboBox fx:id="primeiroLugar" prefHeight="25.0" prefWidth="285.0">
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
+      </ComboBox>
+      <Label text="2º Lugar" />
+      <ComboBox fx:id="segundoLugar" prefHeight="25.0" prefWidth="285.0">
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
+      </ComboBox>
+      <Label text="3º Lugar" />
+      <ComboBox fx:id="terceiroLugar" prefHeight="25.0" prefWidth="285.0">
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
+      </ComboBox>
+      <Button fx:id="submitBtn" mnemonicParsing="false" onAction="#onSubmit" prefHeight="34.0" prefWidth="270.0" text="Criar Resultado">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </Button>
+   </children>
+   <padding>
+      <Insets left="20.0" right="20.0" />
+   </padding>
+</VBox>

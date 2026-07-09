@@ -12,7 +12,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -30,9 +29,6 @@ public class MainController {
     @FXML private TableColumn<Competicao, String> colCompeticaoNome;
     @FXML private TableColumn<Competicao, LocalDate> colCompeticaoData;
     @FXML private TableColumn<Competicao, Integer> colCompeticaoLimite;
-
-    @FXML private Button competicaoBtn;
-    @FXML private Button atletaBtn;
 
     public static void exibirAlerta(Alert.AlertType tipo, String titulo, String cabecalho, String mensagem) {
         Alert alert = new Alert(tipo);
@@ -93,5 +89,37 @@ public class MainController {
         novoStage.showAndWait();
 
         atualizarTabela();
+    }
+
+    @FXML private void abrirCadastroInscricao() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/edu/ifba/saj/ads/poo/presentation/view/CadastroInscricao.fxml"));
+        Parent root = loader.load();
+
+        CadastroInscricaoController controller = loader.getController();
+        controller.setServico(servico);
+        controller.carregarDados(this.repositorio);
+
+        Stage novoStage = new Stage();
+        novoStage.setTitle("Inscrição de Atleta");
+        novoStage.initModality(Modality.APPLICATION_MODAL);
+        novoStage.setScene(new Scene(root));
+        novoStage.setResizable(false);
+        novoStage.showAndWait();
+    }
+
+    @FXML private void abrirCadastroResultado() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/edu/ifba/saj/ads/poo/presentation/view/CadastroResultado.fxml"));
+        Parent root = loader.load();
+
+        CadastroResultadoController controller = loader.getController();
+        controller.setServico(servico);
+        controller.carregarDados(this.repositorio);
+
+        Stage novoStage = new Stage();
+        novoStage.setTitle("Cadastro de Resultado");
+        novoStage.initModality(Modality.APPLICATION_MODAL);
+        novoStage.setScene(new Scene(root));
+        novoStage.setResizable(false);
+        novoStage.showAndWait();
     }
 }

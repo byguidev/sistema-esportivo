@@ -23,4 +23,9 @@ public class Atleta {
     public String getCategoria() {
         return categoria;
     }
+
+    @Override
+    public String toString() {
+        return this.getNome();
+    }
 }

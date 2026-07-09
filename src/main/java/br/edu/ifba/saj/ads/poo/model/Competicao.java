@@ -31,4 +31,9 @@ public class Competicao {
     public int getLimite() {
         return limiteParticipantes;
     }
+
+    @Override
+    public String toString() {
+        return this.getNome();
+    }
 }
