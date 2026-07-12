@@ -4,14 +4,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import br.edu.ifba.saj.ads.poo.model.*;
 import br.edu.ifba.saj.ads.poo.business.ServicoAtividadesEsportivas;
-import br.edu.ifba.saj.ads.poo.data.*;
+import javafx.scene.Node;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
 public class CadastroResultadoController {
     ServicoAtividadesEsportivas servico;
-    RepositorioAtividades repositorio;
+    private Resultado resultadoEditando;
 
     @FXML ComboBox<Competicao> comboBoxCompeticao;
     @FXML ComboBox<Inscricao> primeiroLugar;
@@ -24,12 +24,26 @@ public class CadastroResultadoController {
 
     public void setServico(ServicoAtividadesEsportivas servico) {
         this.servico = servico;
+        carregarDados();
     }
 
-    public void carregarDados(RepositorioAtividades repositorio) {
-        this.repositorio = repositorio;
+    public void setResultadoEditando(Resultado resultado) {
+        this.resultadoEditando = resultado;
+        if (resultado != null) {
+            comboBoxCompeticao.setValue(resultado.getCompeticao());
+            carregarInscricoes(resultado.getCompeticao());
+            primeiroLugar.setValue(servico.listarInscricoesDaCompeticao(resultado.getCompeticao()).stream().filter(i -> i.getAtleta().getId() == resultado.getPrimeiroLugar().getId()).findFirst().orElse(null));
+            segundoLugar.setValue(servico.listarInscricoesDaCompeticao(resultado.getCompeticao()).stream().filter(i -> i.getAtleta().getId() == resultado.getSegundoLugar().getId()).findFirst().orElse(null));
+            terceiroLugar.setValue(servico.listarInscricoesDaCompeticao(resultado.getCompeticao()).stream().filter(i -> i.getAtleta().getId() == resultado.getTerceiroLugar().getId()).findFirst().orElse(null));
+        }
+    }
 
-        ObservableList<Competicao> obsCompeticao = FXCollections.observableArrayList(repositorio.listarCompeticoes());
+    public void carregarDados() {
+        if (servico == null) {
+            return;
+        }
+
+        ObservableList<Competicao> obsCompeticao = FXCollections.observableArrayList(servico.listarCompeticoes());
 
         comboBoxCompeticao.setItems(obsCompeticao);
 
@@ -37,7 +51,7 @@ public class CadastroResultadoController {
     }
 
     private void carregarInscricoes(Competicao competicao) {
-        if (repositorio == null || competicao == null) {
+        if (servico == null || competicao == null) {
             primeiroLugar.setItems(FXCollections.observableArrayList());
             segundoLugar.setItems(FXCollections.observableArrayList());
             terceiroLugar.setItems(FXCollections.observableArrayList());
@@ -47,12 +61,7 @@ public class CadastroResultadoController {
             return;
         }
 
-        ObservableList<Inscricao> inscricoesDaCompeticao = FXCollections.observableArrayList(
-            repositorio.listarInscricoes()
-            .stream()
-            .filter(i -> i.getCompeticao().getId() == competicao.getId())
-            .toList()
-        );
+        ObservableList<Inscricao> inscricoesDaCompeticao = FXCollections.observableArrayList(servico.listarInscricoesDaCompeticao(competicao));
 
         primeiroLugar.setItems(inscricoesDaCompeticao);
         segundoLugar.setItems(inscricoesDaCompeticao);
@@ -76,24 +85,42 @@ public class CadastroResultadoController {
             throw new Exception("Os três colocados precisam ser atletas diferentes.");
         }
 
-        Resultado novoResultado = new Resultado(
-            comboBoxCompeticao.getValue(), 
-            primeiroLugar.getValue().getAtleta(), 
-            segundoLugar.getValue().getAtleta(), 
-            terceiroLugar.getValue().getAtleta());
-        servico.criarResultado(novoResultado);
+        if (resultadoEditando == null) {
+            Resultado novoResultado = new Resultado(
+                comboBoxCompeticao.getValue(), 
+                primeiroLugar.getValue().getAtleta(), 
+                segundoLugar.getValue().getAtleta(), 
+                terceiroLugar.getValue().getAtleta());
+            servico.criarResultado(novoResultado);
+            return;
+        }
+
+        resultadoEditando.setCompeticao(comboBoxCompeticao.getValue());
+        resultadoEditando.setPrimeiroLugar(primeiroLugar.getValue().getAtleta());
+        resultadoEditando.setSegundoLugar(segundoLugar.getValue().getAtleta());
+        resultadoEditando.setTerceiroLugar(terceiroLugar.getValue().getAtleta());
+        servico.atualizarResultado(resultadoEditando);
     }
 
     @FXML private void onSubmit() {
         try {
             salvarResultado();
             MainController.exibirAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Resultado Realizado", "O resultado foi salvo com sucesso!");
-            comboBoxCompeticao.setValue(null);
-            primeiroLugar.setValue(null);
-            segundoLugar.setValue(null);
-            terceiroLugar.setValue(null);
+            if (resultadoEditando != null) {
+                fecharJanela();
+            } else {
+                comboBoxCompeticao.setValue(null);
+                primeiroLugar.setValue(null);
+                segundoLugar.setValue(null);
+                terceiroLugar.setValue(null);
+            }
+            resultadoEditando = null;
         } catch(Exception e) {
-            MainController.exibirAlerta(Alert.AlertType.INFORMATION, "Erro de validação", "Não foi possível salvar", e.getMessage());
+            MainController.exibirAlerta(Alert.AlertType.ERROR, "Erro de validação", "Não foi possível salvar", e.getMessage());
         }
+    }
+
+    private void fecharJanela() {
+        ((Node) comboBoxCompeticao).getScene().getWindow().hide();
     }
 }

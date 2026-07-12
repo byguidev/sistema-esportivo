@@ -16,16 +16,28 @@ public class Inscricao {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public Atleta getAtleta() {
         return atleta;
+    }
+
+    public void setAtleta(Atleta atleta) {
+        this.atleta = atleta;
     }
 
     public Competicao getCompeticao() {
         return competicao;
     }
 
+    public void setCompeticao(Competicao competicao) {
+        this.competicao = competicao;
+    }
+
     @Override
     public String toString() {
-        return this.atleta.getNome();
+        return this.atleta.getNome() + " - " + this.competicao.getNome();
     }
 }

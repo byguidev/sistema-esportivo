@@ -4,7 +4,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import br.edu.ifba.saj.ads.poo.model.*;
 import br.edu.ifba.saj.ads.poo.business.ServicoAtividadesEsportivas;
-import br.edu.ifba.saj.ads.poo.data.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,11 +16,16 @@ public class CadastroInscricaoController {
 
     public void setServico(ServicoAtividadesEsportivas servico) {
         this.servico = servico;
+        carregarDados();
     }
 
-    public void carregarDados(RepositorioAtividades repositorio) {
-        ObservableList<Atleta> obsAtleta = FXCollections.observableArrayList(repositorio.listarAtletas());
-        ObservableList<Competicao> obsCompeticao = FXCollections.observableArrayList(repositorio.listarCompeticoes());
+    public void carregarDados() {
+        if (servico == null) {
+            return;
+        }
+
+        ObservableList<Atleta> obsAtleta = FXCollections.observableArrayList(servico.listarAtletas());
+        ObservableList<Competicao> obsCompeticao = FXCollections.observableArrayList(servico.listarCompeticoes());
 
         comboBoxAtleta.setItems(obsAtleta);
         comboBoxCompeticao.setItems(obsCompeticao);
@@ -39,7 +43,7 @@ public class CadastroInscricaoController {
             comboBoxAtleta.setValue(null);
             comboBoxCompeticao.setValue(null);
         } catch(Exception e) {
-            MainController.exibirAlerta(Alert.AlertType.INFORMATION, "Erro de validação", "Não foi possível salvar", e.getMessage());
+            MainController.exibirAlerta(Alert.AlertType.ERROR, "Erro de validação", "Não foi possível salvar", e.getMessage());
         }
     }
 }
